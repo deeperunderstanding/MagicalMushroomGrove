@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Note.obj-52af7950ac5667d264ce265fa8c2690e.mesh"
+
+[deps]
+
+files=[ "res://.import/Note.obj-52af7950ac5667d264ce265fa8c2690e.mesh" ]
+
+source_file="res://Models/Note.obj"
+dest_files=[ "res://.import/Note.obj-52af7950ac5667d264ce265fa8c2690e.mesh", "res://.import/Note.obj-52af7950ac5667d264ce265fa8c2690e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

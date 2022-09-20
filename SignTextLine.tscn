@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://DawnbreakerFont.tres" type="DynamicFont" id=1]
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.254902, 0.172549, 0, 1 )
+
+[sub_resource type="TextMesh" id=2]
+resource_local_to_scene = true
+material = SubResource( 4 )
+text = "Orders"
+font = ExtResource( 1 )
+horizontal_alignment = 0
+depth = 0.001
+
+[node name="TextLine" type="MeshInstance"]
+cast_shadow = 0
+mesh = SubResource( 2 )

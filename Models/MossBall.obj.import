@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/MossBall.obj-a878dbfa5183a33b7f0703d65345c34a.mesh"
+
+[deps]
+
+files=[ "res://.import/MossBall.obj-a878dbfa5183a33b7f0703d65345c34a.mesh" ]
+
+source_file="res://Models/MossBall.obj"
+dest_files=[ "res://.import/MossBall.obj-a878dbfa5183a33b7f0703d65345c34a.mesh", "res://.import/MossBall.obj-a878dbfa5183a33b7f0703d65345c34a.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

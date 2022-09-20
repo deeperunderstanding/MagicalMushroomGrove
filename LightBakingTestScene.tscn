@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://TerrainShaderMaterial.tres" type="Material" id=1]
+[ext_resource path="res://Models/Terrain_Large_5.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Tree_3.tscn" type="PackedScene" id=3]
+
+[sub_resource type="ProceduralSky" id=1]
+sky_top_color = Color( 1, 0.905882, 0.760784, 1 )
+sky_horizon_color = Color( 0.894118, 1, 0.686275, 1 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+ambient_light_sky_contribution = 0.6
+
+[node name="Spatial" type="Spatial"]
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( -0.394825, -0.223406, 0.891181, 0.742322, 0.493977, 0.452708, -0.54136, 0.840284, -0.0291953, 0, 55.159, 0 )
+visible = false
+light_color = Color( 1, 0.937255, 0.831373, 1 )
+light_bake_mode = 0
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="Terrain_Large_5" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -170.853, 10.0791, -6.19084 )
+cast_shadow = 0
+use_in_baked_light = true
+mesh = ExtResource( 2 )
+material/0 = ExtResource( 1 )
+
+[node name="Tree_4" parent="." instance=ExtResource( 3 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -151.204, 8.8425, -193.3 )
+
+[node name="Tree_5" parent="." instance=ExtResource( 3 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -180.235, 8.8425, -194.544 )
+
+[node name="Tree_6" parent="." instance=ExtResource( 3 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -180.235, 8.8425, -158.505 )
+
+[node name="Tree_7" parent="." instance=ExtResource( 3 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -149.44, 8.8425, -158.505 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -0.0851561, 0, 0.996368, 0, 1, 0, -0.996368, 0, -0.0851561, -119.638, 27.2813, -210.201 )

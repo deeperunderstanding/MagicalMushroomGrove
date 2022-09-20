@@ -1,0 +1,314 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://MushroomHolder.tscn" type="PackedScene" id=2]
+[ext_resource path="res://DebugUI.gd" type="Script" id=3]
+[ext_resource path="res://DawnbreakerFont.tres" type="DynamicFont" id=7]
+
+[sub_resource type="CapsuleMesh" id=3]
+radius = 0.6
+mid_height = 2.0
+
+[sub_resource type="SpatialMaterial" id=4]
+flags_unshaded = true
+flags_do_not_receive_shadows = true
+
+[sub_resource type="CapsuleShape" id=5]
+radius = 0.6
+height = 2.0
+
+[sub_resource type="Animation" id=6]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Capsule:mesh:mid_height")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 2.0, 0.1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Collision:shape:height")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 2.0, 0.1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Capsule:translation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 2, 0 ), Vector3( 0, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Collision:translation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 2, 0 ), Vector3( 0, 1, 0 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Yaw/Camera:translation")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 3, 0 ), Vector3( 0, 1.5, 0 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ceiling_check:translation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 3.5, 1.42109e-14 ), Vector3( 0, 1.5, 1.42109e-14 ) ]
+}
+
+[sub_resource type="SphereShape" id=7]
+radius = 60.0
+
+[sub_resource type="SphereShape" id=8]
+radius = 20.0
+
+[sub_resource type="GDScript" id=9]
+script/source = "extends Label
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	# Called every time the node is added to the scene.
+	# Initialization here
+	pass
+
+func _process(delta):
+	set_text(\"FPS: \" + str(Engine.get_frames_per_second()))
+"
+
+[node name="Player" type="KinematicBody" groups=["player"]]
+script = ExtResource( 1 )
+
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+stretch = true
+stretch_shrink = 2
+
+[node name="Viewport" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 512, 300 )
+size_override_stretch = true
+handle_input_locally = false
+render_target_update_mode = 0
+shadow_atlas_size = 256
+
+[node name="Camera" type="Camera" parent="ViewportContainer/Viewport"]
+cull_mask = 1048573
+current = true
+far = 200.0
+
+[node name="RigViewportContainer" type="ViewportContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+stretch = true
+stretch_shrink = 4
+
+[node name="Viewport" type="Viewport" parent="RigViewportContainer"]
+size = Vector2( 256, 150 )
+size_override_stretch = true
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 0
+shadow_atlas_size = 1024
+
+[node name="Camera" type="Camera" parent="RigViewportContainer/Viewport"]
+cull_mask = 2
+far = 3.0
+
+[node name="Capsule" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 0 )
+cast_shadow = 0
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="ceiling_check" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.5, 1.42109e-14 )
+enabled = true
+cast_to = Vector3( 0, 0, 4 )
+
+[node name="Collision" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 0 )
+shape = SubResource( 5 )
+
+[node name="floor_check" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+enabled = true
+
+[node name="Yaw" type="Spatial" parent="."]
+
+[node name="Camera" type="Camera" parent="Yaw"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+cull_mask = 3
+far = 250.0
+
+[node name="Item_Holder" type="Spatial" parent="Yaw/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.584962, -0.714723, -1.12066 )
+
+[node name="look_at" type="Position3D" parent="Yaw/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.3193 )
+
+[node name="pickup_pos" type="Position3D" parent="Yaw/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.10606 )
+
+[node name="InteractionRay" type="RayCast" parent="Yaw/Camera"]
+enabled = true
+cast_to = Vector3( 0, 0, -5 )
+collision_mask = 3
+
+[node name="stair_check" type="RayCast" parent="Yaw"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02655, -0.624282 )
+enabled = true
+cast_to = Vector3( 0, -0.5, 0 )
+
+[node name="Mushrooms" parent="Yaw" instance=ExtResource( 2 )]
+
+[node name="crouching" type="AnimationPlayer" parent="."]
+anims/crouch = SubResource( 6 )
+
+[node name="HighQuality" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.80502, 0 )
+monitorable = false
+
+[node name="CollisionShape" type="CollisionShape" parent="HighQuality"]
+shape = SubResource( 7 )
+
+[node name="Proximity" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Proximity"]
+shape = SubResource( 8 )
+
+[node name="DebugUI" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FPS" type="Label" parent="DebugUI"]
+margin_right = 1024.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0.882353, 0, 0, 1 )
+script = SubResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MatChange" type="Label" parent="DebugUI"]
+margin_top = 18.0
+margin_right = 1024.0
+margin_bottom = 32.0
+custom_colors/font_color = Color( 0.792157, 0, 0, 1 )
+
+[node name="ShaderChanges" type="Label" parent="DebugUI"]
+margin_top = 36.0
+margin_right = 1024.0
+margin_bottom = 50.0
+custom_colors/font_color = Color( 0.792157, 0, 0, 1 )
+
+[node name="Vertices" type="Label" parent="DebugUI"]
+margin_top = 54.0
+margin_right = 1024.0
+margin_bottom = 68.0
+custom_colors/font_color = Color( 0.792157, 0, 0, 1 )
+
+[node name="ProcTime" type="Label" parent="DebugUI"]
+margin_top = 72.0
+margin_right = 1024.0
+margin_bottom = 86.0
+custom_colors/font_color = Color( 0.792157, 0, 0, 1 )
+
+[node name="PhysProcTime" type="Label" parent="DebugUI"]
+margin_top = 90.0
+margin_right = 1024.0
+margin_bottom = 104.0
+custom_colors/font_color = Color( 0.792157, 0, 0, 1 )
+
+[node name="interaction" type="Label" parent="DebugUI"]
+margin_top = 108.0
+margin_right = 1024.0
+margin_bottom = 122.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UI" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Middle" type="VBoxContainer" parent="UI"]
+margin_right = 1024.0
+margin_bottom = 600.0
+mouse_filter = 2
+alignment = 2
+
+[node name="Middle" type="HBoxContainer" parent="UI/Middle"]
+margin_top = 549.0
+margin_right = 1024.0
+margin_bottom = 600.0
+mouse_filter = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Middle/Middle"]
+margin_left = 432.0
+margin_right = 592.0
+margin_bottom = 51.0
+custom_constants/margin_bottom = 16
+
+[node name="BottomText" type="Label" parent="UI/Middle/Middle/MarginContainer"]
+unique_name_in_owner = true
+margin_right = 160.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 7 )
+text = "YOU FAILED
+GET LOSt"
+
+[connection signal="animation_finished" from="crouching" to="." method="_on_crouching_animation_finished"]
+[connection signal="body_entered" from="HighQuality" to="." method="_on_HighQuality_body_entered"]
+[connection signal="body_exited" from="HighQuality" to="." method="_on_HighQuality_body_exited"]
+[connection signal="body_entered" from="Proximity" to="." method="_on_Proximity_body_entered"]
+[connection signal="body_exited" from="Proximity" to="." method="_on_Proximity_body_exited"]

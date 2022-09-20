@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://MushroomReceiver.gd" type="Script" id=1]
+
+[node name="Mushrooms" type="Spatial"]
+unique_name_in_owner = true
+transform = Transform( 0.999824, -0.0187437, 0, 0.0187437, 0.999824, 0, 0, 0, 1, 0, 2.98647, -1.75187 )
+script = ExtResource( 1 )
+
+[node name="RayCast" type="RayCast" parent="."]
+cast_to = Vector3( 0, -20, 0 )
