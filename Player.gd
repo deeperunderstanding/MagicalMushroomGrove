@@ -29,7 +29,7 @@ const CROUCH = 1
 var posture_state = STAND
 
 var run_speed = 8 #8
-var sprint_speed = 10
+var sprint_speed = 12
 var walk_speed = 2.7
 
 var move_speed = run_speed

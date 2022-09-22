@@ -17,6 +17,11 @@ func _ready():
 	render_lines(initial_lines)
 		
 func render_lines(lines):
+	var pixel_factor = 20
+	
+	if lines.size() > 12:
+		pixel_factor = 15
+	
 	for line in $Lines.get_children():
 		$Lines.remove_child(line)
 		line.queue_free()
@@ -28,7 +33,7 @@ func render_lines(lines):
 			line.mesh.text = text
 			line.mesh.pixel_size = pixel_size
 			$Lines.add_child(line)
-			line.global_transform.origin = $TextStart.global_transform.origin + Vector3(0, -i * pixel_size * 20 , 0)
+			line.global_transform.origin = $TextStart.global_transform.origin + Vector3(0, -i * pixel_size * pixel_factor , 0)
 		i += 1
 	
 		

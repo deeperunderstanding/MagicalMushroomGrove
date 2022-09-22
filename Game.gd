@@ -10,7 +10,7 @@ var game_time = 0
 var queued_text = [
 	str(
 		"Controls:", "\n", "\n",
-		"[W,A,S,D] Keys to move around", "\n",
+		"[W,A,S,D] Keys to move", "\n",
 		"[Mouse] to look around", "\n",
 		"[Space] to jump", "\n",
 		"[E] to interact and pick up mushrooms", "\n",
@@ -21,21 +21,16 @@ var queued_text = [
 	str(
 		"In the middle of the forest you'll find a magic cauldron", "\n",
 		"and next to it a board which will show you a recipe.", "\n",
-		"Collect the mushrooms from the recipe", "\n",
-		"and throw them into the cauldron", "\n",
-		"to make potions", "\n", "\n",
+		"Collect the mushrooms from the recipe and ", "\n",
+		"throw them into the cauldron to make potions", "\n", "\n",
 		
 		"The Game is still very much in development", "\n", "\n",
 		
 		"Press [LMB] to Continue"
 	),
 	str(
-		"Made for Cozy Autumn Jam 2022", "\n", "\n",
-		"Credits: ", "\n", "\n",
-		"This Font is from the Dawnbringer Tileset", "\n",
-		"https://opengameart.org/content/dawnlike-16x16-universal-rogue-like-tileset-v181", "\n", "\n",
-		"\n", "\n",
-		"Made with Godot", "\n", "\n",
+		"Made for Cozy Autumn Jam 2022", "\n",
+		"with the Godot Engine v3.5", "\n", "\n",
 		"Press [LMB] to Continue"
 	)
 ]
